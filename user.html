@@ -69,18 +69,41 @@
   </div>
 </body>
 <script>
-  // 获取用户详细信息
-  $.ajax({
-    url: BigNew.user_detail,
-    type: 'get',
-    success: function(backData) {
-      console.log(backData);
-      $('#inputEmail1').val(backData.data.username);
-      $('#inputEmail2').val(backData.data.nickname);
-      $('#inputEmail3').val(backData.data.email);
-      $('.control-label').val(backData.data.password);
-      $('.user_pic').attr('src', backData.data.userPic);
-    }
+  $(function() {
+    // 获取用户详细信息
+    $.ajax({
+      url: BigNew.user_detail,
+      type: 'get',
+      success: function(backData) {
+        console.log(backData);
+        $('#inputEmail1').val(backData.data.username);
+        $('#inputEmail2').val(backData.data.nickname);
+        $('#inputEmail3').val(backData.data.email);
+        $('.control-label').val(backData.data.password);
+        $('.user_pic').attr('src', backData.data.userPic);
+      }
+
+    })
+
+    // 修改
+    $('.btn-edit').click(function(e) {
+      e.preventDefault();
+      var data = new FormData(document.querySelector('form'));
+      $.ajax({
+        url: BigNew.user_edit,
+        type: 'post',
+        data: data,
+        processData: false,
+        contentType: false,
+        success: function(backData) {
+          console.log(backData);
+          if (backData.code == 200) {
+            window.parent.location.reload();
+          }
+        }
+      })
+    })
+
 
   })
 </script>
