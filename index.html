@@ -65,6 +65,14 @@
         $(this).addClass('active').siblings().removeClass('active');
       })
     })
+
+
+    // 退出功能实现
+    $('.logout').click(function() {
+      if (window.confirm("真的要退出吗？？？"));
+      window.localStorage.removeItem('token');
+      window.location.href = './login.html';
+    })
   </script>
 </body>
 
