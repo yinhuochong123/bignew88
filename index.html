@@ -73,6 +73,19 @@
       window.localStorage.removeItem('token');
       window.location.href = './login.html';
     })
+
+
+    // 进入首页，头像和姓名发生改变（获取个人信息）
+    $.ajax({
+      url: BigNew.user_info,
+      type: 'get',
+      success: function(backData) {
+        console.log(backData);
+        $('.user_info>img').attr('src', backData.data.userPic);
+        $('.user_info>span').text('欢迎  ' + backData.data.nickname);
+        $('.user_center_link>img').attr('src', backData.data.userPic);
+      }
+    })
   </script>
 </body>
 
