@@ -87,21 +87,27 @@
 
     // 修改
     $('.btn-edit').click(function(e) {
-      e.preventDefault();
-      var data = new FormData(document.querySelector('form'));
-      $.ajax({
-        url: BigNew.user_edit,
-        type: 'post',
-        data: data,
-        processData: false,
-        contentType: false,
-        success: function(backData) {
-          console.log(backData);
-          if (backData.code == 200) {
-            window.parent.location.reload();
+        e.preventDefault();
+        var data = new FormData(document.querySelector('form'));
+        $.ajax({
+          url: BigNew.user_edit,
+          type: 'post',
+          data: data,
+          processData: false,
+          contentType: false,
+          success: function(backData) {
+            console.log(backData);
+            if (backData.code == 200) {
+              window.parent.location.reload();
+            }
           }
-        }
+        })
       })
+      // 本地图片预览
+    $('#exampleInputFile').change(function() {
+      var url = URL.createObjectURL(this.files[0]);
+      $(this).siblings('img').attr('src', url);
+
     })
 
 
