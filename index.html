@@ -56,44 +56,15 @@
   </div>
   <script>
     $(function() {
-      // 二级菜单的展开收齐
-      $(".level01:eq(1)").click(function() {
-        // 隔壁的level02展开或收起
-        $(this).next('.level02').slideToggle()
+      // 二级菜单的展开和收起
+      $('.level01:eq(1)').click(function() {
+        $(this).next('.level02').slideToggle();
       });
-
-      // 点击高亮（排他思想）
+      // 高亮排他思想
       $('.level01').click(function() {
         $(this).addClass('active').siblings().removeClass('active');
       })
     })
-
-    // 获取用户信系
-    $.ajax({
-      url: 'http://localhost:8080/api/v1/admin/user/info',
-      headers: {
-        Authorization: window.localStorage.getItem('token')
-      },
-
-      success: function(backData) {
-        // console.log(backData)
-        // 设置左侧头像和名字
-        $(".user_info>img").attr('src', backData.data.userPic);
-        $(".user_info>span").text('欢迎  ' + backData.data.nickname);
-        // 设置右侧头像
-        $(".user_center_link>img").attr('src', backData.data.userPic);
-
-      },
-      // 请求失败之后的回掉函数（没有登入直接赋值网址的情况下）
-      error: function(backData) {
-        // console.log('我村啦')
-        // console.log(backData);
-        if (backData.statusText === 'Forbidden') {
-          alert("滚犊子");
-          window.location.href = './login.html';
-        }
-      }
-    });
   </script>
 </body>
 
